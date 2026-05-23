@@ -1,0 +1,113 @@
+aid: bbdo
+name: BBDO Worldwide
+description: >-
+  BBDO Worldwide is a global advertising agency network founded in 1928 and
+  headquartered in New York City. It is the largest of the creative-agency
+  networks owned by Omnicom Group, with roughly 15,000 employees across
+  approximately 289 offices in 81 countries (per Wikipedia, citing company
+  data). The agency's positioning is "Do Big Things," and its public work is
+  campaign-led — Pepsi, Budweiser, McDonald's, M&M's, Snickers, Visa, AT&T
+  Business, Volkswagen, Skoda, Whiskas, and many more. BBDO has been named
+  Cannes Lions Network of the Year multiple times since 2007 and Network of
+  the Decade in 2020. BBDO does not publish a developer portal, public REST
+  APIs, OpenAPI specifications, SDKs, status page, or pricing — its product
+  is creative work delivered to brand clients, not software offered to
+  developers. This repository indexes the public properties (homepage,
+  network site, news, parent company, GitHub org, and notable agency
+  network members) so the API Evangelist network can track the absence of
+  a developer surface and link BBDO to its parent Omnicom and sibling
+  networks (DDB Worldwide, TBWA Worldwide).
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Advertising
+  - Marketing
+  - Creative
+  - Agency
+  - Agency Network
+  - Holding Company Subsidiary
+  - Brand Strategy
+  - Media
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/bbdo/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://bbdo.com
+  - type: Work
+    url: https://bbdo.com/work
+  - type: News
+    url: https://bbdo.com/news
+  - type: About
+    url: https://bbdo.com/about
+  - type: Parent
+    url: https://omc.com/
+    name: Omnicom Group
+  - type: ParentLegacy
+    url: https://www.omnicomgroup.com/
+    name: Omnicom Group (legacy domain, redirects to omc.com)
+  - type: SisterNetwork
+    url: https://www.ddb.com/
+    name: DDB Worldwide
+  - type: SisterNetwork
+    url: https://www.tbwa.com/
+    name: TBWA Worldwide
+  - type: SisterAgency
+    url: https://www.proximityworldwide.com/
+    name: Proximity Worldwide (BBDO's customer-engagement sibling)
+  - type: GitHub
+    url: https://github.com/BBDO
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/bbdo
+  - type: Wikipedia
+    url: https://en.wikipedia.org/wiki/BBDO
+  - type: Tagline
+    title: Do Big Things
+  - type: HeadquartersCity
+    title: New York, NY, USA
+  - type: Founded
+    title: '1928'
+  - type: Scale
+    title: ~15,000 employees / ~289 offices / ~81 countries (per Wikipedia)
+  - type: Award
+    title: Cannes Lions Network of the Decade (2020)
+  - type: Award
+    title: Cannes Lions Network of the Year (2007-2011, 2017-2018)
+  - type: Award
+    title: Most Effective Network in the World — Global Effie Index (multiple years)
+  - type: NotableClient
+    title: Pepsi
+  - type: NotableClient
+    title: Budweiser
+  - type: NotableClient
+    title: McDonald's
+  - type: NotableClient
+    title: "M&M's / Mars"
+  - type: NotableClient
+    title: Snickers
+  - type: NotableClient
+    title: Visa
+  - type: NotableClient
+    title: AT&T Business
+  - type: NotableClient
+    title: Volkswagen
+  - type: NotableClient
+    title: Skoda
+  - type: NotableClient
+    title: Whiskas
+  - type: NotableCampaign
+    title: Pepsi — "The Choice" (Super Bowl 60, 2026)
+  - type: NotableCampaign
+    title: Budweiser — "American Icons" (Super Bowl 60, 2026)
+  - type: NotableCampaign
+    title: Snickers — "You're Not You When You're Hungry"
+  - type: NotableCampaign
+    title: Visa — "It's Everywhere You Want To Be"
+  - type: NotableCampaign
+    title: Burger King — "Have It Your Way"
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

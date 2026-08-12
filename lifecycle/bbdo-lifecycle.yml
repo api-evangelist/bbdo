@@ -1,0 +1,52 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  https://bbdo.com/wp-json/ route table + site probes; no BBDO-published policy
+  pages exist
+note: >-
+  BBDO Worldwide publishes no versioning policy, no deprecation policy, no SLA
+  and no status page. bbdo.com is a four-page marketing site (home, about, work,
+  news per /wp-sitemap-posts-page-1.xml) with no developer section, so there is
+  nothing to point a StatusPage or Deprecation pointer at. The versioning
+  information below is the WordPress platform's, read off the deployed route
+  namespaces.
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  docs: https://developer.wordpress.org/rest-api/
+  provider_published: false
+  namespaces:
+    - {namespace: 'wp/v2', role: WordPress core content API}
+    - {namespace: 'acf/v3', role: Advanced Custom Fields REST surface}
+    - {namespace: 'oembed/1.0', role: oEmbed provider}
+    - {namespace: 'wp-abilities/v1', role: WordPress Abilities API (gated, 401)}
+    - {namespace: 'wp-block-editor/v1', role: block editor support}
+    - {namespace: 'wp-site-health/v1', role: site health checks}
+    - {namespace: 'ai1wm/v1', role: All-in-One WP Migration plugin}
+    - {namespace: 'duplicate-post/v1', role: Yoast Duplicate Post plugin}
+    - {namespace: 'wpe/cache-plugin/v1', role: WP Engine cache plugin}
+    - {namespace: 'wpe_sign_on_plugin/v1', role: WP Engine sign-on plugin}
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  provider_published: false
+  evidence:
+    - {url: 'https://bbdo.com/wp-json/wp/v2/work?per_page=1', status: 200, note: 'no Sunset or Deprecation header returned'}
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+    - {url: 'https://bbdo.com/status', status: 404}
+support:
+  developer_channel: null
+  note: >-
+    No developer support channel, forum, or contact page. /contact returned 404;
+    the site exposes no contact route at all.
+deprecated_operations: []
+hosting:
+  platform: WP Engine
+  evidence: 'X-Powered-By: WP Engine response header'
+  edge: Cloudflare

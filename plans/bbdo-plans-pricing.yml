@@ -1,0 +1,18 @@
+generated: '2026-08-12'
+method: probed
+source: https://bbdo.com/ and https://bbdo.com/wp-sitemap-posts-page-1.xml
+plan_count: 0
+note: >-
+  BBDO Worldwide publishes no plans, pricing, tiers or quotas of any kind. It is
+  a creative agency network that sells campaign work to brand clients on
+  negotiated retainers and project fees; there is no product to price and no
+  self-service signup. The public site is four pages — home, about, work, news —
+  with no pricing, no contact form, and no commercial page. The WordPress REST
+  API on bbdo.com is an unmonetized byproduct of the CMS, not a metered
+  offering.
+plans: []
+evidence:
+  - {url: 'https://bbdo.com/wp-sitemap-posts-page-1.xml', status: 200, note: 'sitemap lists exactly four pages: /, /about/, /work/, /news/'}
+  - {url: 'https://bbdo.com/wp-json/wp/v2/pages?per_page=20', status: 200, note: 'the CMS itself reports 4 published pages; none is a pricing page'}
+  - {url: 'https://bbdo.com/contact', status: 404}
+enterprise_only: true

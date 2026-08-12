@@ -1,0 +1,35 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  OPTIONS responses from https://bbdo.com/wp-json/wp/v2/{work,news,posts,pages}
+note: >-
+  These are the JSON Schema documents BBDO's own WordPress REST API returns for
+  each of its content collections, saved verbatim from the `schema` member of
+  the OPTIONS response. They are draft-04. `work` and `news` are BBDO's
+  registered custom post types — the campaign case studies and press items
+  behind bbdo.com/work and bbdo.com/news.
+schemas:
+  - file: bbdo-work.json
+    title: work
+    source: https://bbdo.com/wp-json/wp/v2/work
+    dialect: http://json-schema.org/draft-04/schema#
+    properties: 20
+    records_published: 46
+  - file: bbdo-news.json
+    title: news
+    source: https://bbdo.com/wp-json/wp/v2/news
+    dialect: http://json-schema.org/draft-04/schema#
+    properties: 20
+    records_published: 60
+  - file: bbdo-posts.json
+    title: post
+    source: https://bbdo.com/wp-json/wp/v2/posts
+    dialect: http://json-schema.org/draft-04/schema#
+    properties: 28
+    records_published: 1
+  - file: bbdo-pages.json
+    title: page
+    source: https://bbdo.com/wp-json/wp/v2/pages
+    dialect: http://json-schema.org/draft-04/schema#
+    properties: 26
+    records_published: 4

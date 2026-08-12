@@ -1,0 +1,108 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  observed live responses from https://bbdo.com/wp-json/wp/v2/* plus the route
+  args published in discovery/bbdo-wp-v2-namespace.json
+docs: https://developer.wordpress.org/rest-api/
+note: >-
+  BBDO publishes no API conventions of its own. Everything below was read off
+  the wire from bbdo.com's WordPress REST API — the declared route arguments and
+  the response headers and error bodies actually returned. It is the WordPress
+  platform contract as deployed at bbdo.com, not an agency-authored one.
+authentication:
+  style: anonymous read; HTTP Basic (Application Passwords) or cookie+nonce for writes
+  artifact: authentication/bbdo-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key header, parameter or documented retry contract. No
+    Idempotency-Key argument appears on any of the 200 registered routes, and
+    write operations are not reachable anonymously. No Idempotency pointer is
+    emitted.
+pagination:
+  style: page-number with offset alternative
+  parameters:
+    - {name: page, in: query, default: 1, description: Current page of the collection}
+    - {name: per_page, in: query, default: 10, min: 1, max: 100}
+    - {name: offset, in: query, description: Offset the result set by a specific number of items}
+  response_headers:
+    - {name: X-WP-Total, description: Total number of matching items, observed: '46 on wp/v2/work'}
+    - {name: X-WP-TotalPages, description: Total number of pages, observed: '46 at per_page=1'}
+    - {name: Link, description: 'RFC 8288 link relations; rel="next" / rel="prev"', observed: '<https://bbdo.com/wp-json/wp/v2/work?per_page=1&page=2>; rel="next"'}
+  cors_exposed: 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, Link'
+  bounds_enforced: true
+  bounds_evidence:
+    url: https://bbdo.com/wp-json/wp/v2/work?per_page=999
+    status: 400
+    message: per_page must be between 1 (inclusive) and 100 (inclusive)
+sparse_fieldsets:
+  supported: true
+  parameter: _fields
+  description: Comma-separated list of properties to return, e.g. ?_fields=id,slug,link,title
+  verified: 'https://bbdo.com/wp-json/wp/v2/pages?per_page=20&_fields=id,slug,link,title -> 200'
+expansion:
+  supported: true
+  parameter: _embed
+  description: Embeds linked resources (author, featured media, terms) inline via _embedded
+  discovery: Every resource carries a HAL-style _links object with curied relations
+filtering_and_sort:
+  parameters:
+    - search
+    - search_columns
+    - search_semantics
+    - slug
+    - status
+    - include
+    - exclude
+    - after
+    - before
+    - modified_after
+    - modified_before
+    - order
+    - orderby
+    - context
+  contexts: [view, embed, edit]
+  source: discovery/bbdo-work-options.json
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  namespaces_registered: 10
+  note: >-
+    Version is carried in the URL namespace segment (/wp-json/wp/v2/...). Plugin
+    namespaces version independently (acf/v3, ai1wm/v1, wp-abilities/v1). BBDO
+    publishes no versioning or deprecation policy of its own.
+  artifact: lifecycle/bbdo-lifecycle.yml
+error_envelope:
+  format: wordpress-rest-error
+  rfc9457: false
+  content_type: application/json
+  shape:
+    code: machine-readable error slug, e.g. rest_invalid_param
+    message: human-readable sentence
+    data.status: HTTP status repeated in the body
+    data.params: per-parameter messages on validation failures
+    data.details: nested per-parameter error objects
+  artifact: errors/bbdo-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After headers were observed on any
+    200 response. The only published throttle signal on the domain is
+    "Crawl-delay: 10" in /robots.txt, which is a crawler directive, not an API
+    limit.
+  artifact: rate-limits/bbdo-rate-limits.yml
+caching:
+  headers_observed:
+    - 'Cache-Control: max-age=600, must-revalidate'
+    - 'X-Cacheable: SHORT'
+    - 'X-Cache: HIT'
+    - 'CF-Cache-Status: DYNAMIC'
+  edge: Cloudflare in front of WP Engine
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is returned. The only per-request
+    identifier is Cloudflare's CF-Ray, which is edge infrastructure rather than
+    an API-level trace handle.
+robots:
+  api_indexing: 'X-Robots-Tag: noindex is returned on wp/v2 collection responses'

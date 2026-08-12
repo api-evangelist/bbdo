@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: probed
+source: live error responses observed against https://bbdo.com/wp-json/wp/v2/*
+docs: https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/
+format: wordpress-rest-error
+rfc9457: false
+note: >-
+  BBDO publishes no error reference. Every entry below is an error body actually
+  returned by bbdo.com during this pass — nothing is extrapolated from the
+  WordPress error registry at large. The envelope is WordPress's own
+  {code, message, data:{status}} shape, served as application/json; it is not
+  RFC 9457 problem+json.
+envelope:
+  content_type: application/json
+  fields:
+    code: machine-readable error slug
+    message: human-readable message
+    data.status: HTTP status code repeated in the body
+    data.params: map of parameter name to validation message (validation errors only)
+    data.details: nested per-parameter error objects (validation errors only)
+problems:
+  - status: 404
+    code: rest_no_route
+    title: No route was found matching the URL and request method
+    observed_at: https://bbdo.com/wp-json/wp/v2/nope
+    remediation: >-
+      Check the route against the published route table at
+      discovery/bbdo-wp-json-root.json; the method must also be one the route
+      registers.
+  - status: 404
+    code: rest_post_invalid_id
+    title: Invalid post ID
+    observed_at: https://bbdo.com/wp-json/wp/v2/work/999999
+    remediation: List the collection first and use an id returned by it.
+  - status: 400
+    code: rest_invalid_param
+    title: 'Invalid parameter(s)'
+    observed_at: https://bbdo.com/wp-json/wp/v2/work?per_page=999
+    detail_example: per_page must be between 1 (inclusive) and 100 (inclusive)
+    nested_code: rest_out_of_bounds
+    remediation: >-
+      Read data.params for the offending parameter and its bound; per_page is
+      capped at 100.
+  - status: 401
+    code: rest_cannot_create
+    title: Sorry, you are not allowed to create posts as this user
+    observed_at: 'POST https://bbdo.com/wp-json/wp/v2/work'
+    remediation: >-
+      Write operations require an authenticated WordPress user (Application
+      Password or cookie+nonce). BBDO offers no self-service credential.
+  - status: 401
+    code: rest_forbidden
+    title: Sorry, you are not allowed to do that
+    observed_at: https://bbdo.com/wp-json/wp-abilities/v1/abilities
+    remediation: >-
+      The WordPress Abilities namespace is registered but gated; it cannot be
+      introspected anonymously.

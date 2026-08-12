@@ -1,0 +1,33 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  observed response headers on https://bbdo.com/wp-json/wp/v2/* and
+  https://bbdo.com/robots.txt
+limit_count: 0
+note: >-
+  BBDO publishes no rate limits and its API returns no rate-limit signal. No
+  RateLimit-*, X-RateLimit-* or Retry-After header appeared on any 200 response
+  from the WordPress REST API, and there is no developer documentation to state
+  a limit. The only throttle expressed anywhere on the domain is a crawler
+  directive in robots.txt. An agent consuming this API has no runtime signal to
+  back off on and would discover the ceiling only by hitting Cloudflare's edge
+  protection.
+limits: []
+headers_returned: []
+observed_signals:
+  - source: https://bbdo.com/robots.txt
+    status: 200
+    directive: 'Crawl-delay: 10'
+    scope: crawler
+    note: >-
+      A robots.txt crawl directive, not an API rate limit — it does not apply to
+      /wp-json/ programmatic access and carries no runtime response header.
+  - source: edge
+    provider: Cloudflare
+    note: >-
+      bbdo.com is fronted by Cloudflare with bot management active; a /wp-json/
+      request under a generic bot user-agent was served an HTML challenge shell
+      on one attempt while a browser user-agent received application/json. Any
+      throttling is therefore edge policy, undocumented and not expressed in
+      response headers.
+exhaustion_status: null

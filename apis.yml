@@ -12,11 +12,17 @@ description: >-
   the Decade in 2020. BBDO does not publish a developer portal, public REST
   APIs, OpenAPI specifications, SDKs, status page, or pricing — its product
   is creative work delivered to brand clients, not software offered to
-  developers. This repository indexes the public properties (homepage,
-  network site, news, parent company, GitHub org, and notable agency
-  network members) so the API Evangelist network can track the absence of
-  a developer surface and link BBDO to its parent Omnicom and sibling
-  networks (DDB Worldwide, TBWA Worldwide).
+  developers. The one machine-readable surface bbdo.com serves is the
+  WordPress REST API behind the site itself: /wp-json/ answers anonymously
+  with a 200-route discovery document, and the agency's own `work` and
+  `news` custom post types are readable without credentials — 46 campaign
+  case studies and 60 press items with draft-04 JSON Schemas available from
+  each collection's OPTIONS response. That is a CMS byproduct, not a product
+  BBDO designed, documents, prices, or supports. This repository indexes the
+  public properties (homepage, network site, news, parent company, GitHub
+  org, and notable agency network members), captures what the WordPress API
+  actually serves, and links BBDO to its parent Omnicom and sibling networks
+  (DDB Worldwide, TBWA Worldwide).
 type: Index
 accessModel:
   pricing: unknown
@@ -39,15 +45,86 @@ tags:
   - Holding Company Subsidiary
   - Brand Strategy
   - Media
+  - Content
+  - WordPress
 url: >-
   https://raw.githubusercontent.com/api-evangelist/bbdo/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-05-23'
+modified: '2026-08-12'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: bbdo:wordpress-rest-api
+    name: BBDO WordPress REST API
+    description: >-
+      bbdo.com runs on WordPress (WP Engine, fronted by Cloudflare) and leaves
+      the WordPress REST API open for anonymous reads. The route discovery
+      document at https://bbdo.com/wp-json/ enumerates 10 namespaces and 200
+      routes, and two of the registered post types are BBDO's own editorial
+      content models: `work`, the campaign case-study archive behind
+      bbdo.com/work (46 published records), and `news`, the press archive behind
+      bbdo.com/news (60 published records). Both are readable without
+      credentials, paginate with page/per_page plus X-WP-Total and RFC 8288 Link
+      headers, support sparse fieldsets via _fields and expansion via _embed,
+      and return draft-04 JSON Schema documents from OPTIONS. Writes require a
+      WordPress Application Password issued from BBDO's own admin; there is no
+      self-service registration. This is the WordPress platform's contract as
+      deployed at bbdo.com, not an API product BBDO designed, documents, prices,
+      or supports — BBDO publishes no developer portal, OpenAPI, SDK, changelog,
+      status page, or rate limits.
+    humanURL: https://developer.wordpress.org/rest-api/
+    baseURL: https://bbdo.com/wp-json/wp/v2
+    tags:
+      - Content
+      - JSON
+      - REST
+      - WordPress
+      - Advertising
+    properties:
+      - type: Documentation
+        url: https://developer.wordpress.org/rest-api/
+        name: WordPress REST API Handbook (platform documentation; BBDO publishes none)
+      - type: Discovery
+        url: https://bbdo.com/wp-json/
+        name: WordPress REST API route discovery document
+      - type: JSONSchema
+        url: json-schema/_index.yml
+      - type: Authentication
+        url: authentication/bbdo-authentication.yml
+      - type: Conventions
+        url: conventions/bbdo-conventions.yml
+      - type: ErrorCatalog
+        url: errors/bbdo-problem-types.yml
+      - type: DataModel
+        url: data-model/bbdo-data-model.yml
+      - type: RateLimits
+        url: rate-limits/bbdo-rate-limits.yml
 common:
   - type: DomainSecurity
     url: security/bbdo-domain-security.yml
+  - type: Discovery
+    url: discovery/bbdo-discovery.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Authentication
+    url: authentication/bbdo-authentication.yml
+  - type: Conventions
+    url: conventions/bbdo-conventions.yml
+  - type: ErrorCatalog
+    url: errors/bbdo-problem-types.yml
+  - type: DataModel
+    url: data-model/bbdo-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/bbdo-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/bbdo-rate-limits.yml
+  - type: Plans
+    url: plans/bbdo-plans-pricing.yml
+  - type: Conformance
+    url: conformance/bbdo-conformance.yml
+  - type: Packages
+    url: packages/bbdo-packages.yml
+  - type: LLMsTxt
+    url: llms/bbdo-llms.txt
   - type: Website
     url: https://bbdo.com
   - type: Work
@@ -71,8 +148,9 @@ common:
   - type: SisterAgency
     url: https://www.proximityworldwide.com/
     name: Proximity Worldwide (BBDO's customer-engagement sibling)
-  - type: GitHub
+  - type: GitHubOrganization
     url: https://github.com/BBDO
+    name: BBDO on GitHub — 31 public repos, all campaign experiments and forks last pushed 2010-2014
   - type: LinkedIn
     url: https://www.linkedin.com/company/bbdo
   - type: Wikipedia
@@ -124,3 +202,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

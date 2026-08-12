@@ -1,0 +1,94 @@
+generated: '2026-08-12'
+method: probed
+source: https://bbdo.com/wp-json/
+summary: >-
+  BBDO Worldwide publishes no developer portal and no OpenAPI, but bbdo.com is a
+  WordPress site (hosted on WP Engine, fronted by Cloudflare) whose WordPress
+  REST API is left open for anonymous reads. The route discovery document at
+  https://bbdo.com/wp-json/ is a real, machine-readable contract served from
+  BBDO's own host: it names the site ("BBDO", url https://bbdo.com), enumerates
+  10 namespaces and 200 routes, and declares the supported authentication
+  mechanism. Two of the registered post types are BBDO's own editorial content
+  models — `work` (46 published campaign entries) and `news` (60 published
+  items) — so this is not a generic install shell but the API behind the
+  agency's public case-study and press archive. Recorded here because it is what
+  BBDO actually serves; it is the WordPress platform's contract, not an API
+  product BBDO designed, sells, documents, or supports.
+documents:
+  - name: WordPress REST API root discovery document
+    url: https://bbdo.com/wp-json/
+    file: bbdo-wp-json-root.json
+    status: 200
+    content_type: application/json
+    routes: 200
+    namespaces:
+      - oembed/1.0
+      - wpe/cache-plugin/v1
+      - wpe_sign_on_plugin/v1
+      - ai1wm/v1
+      - duplicate-post/v1
+      - wp/v2
+      - wp-site-health/v1
+      - wp-block-editor/v1
+      - wp-abilities/v1
+      - acf/v3
+  - name: wp/v2 namespace index (route args + endpoint contracts)
+    url: https://bbdo.com/wp-json/wp/v2
+    file: bbdo-wp-v2-namespace.json
+    status: 200
+    content_type: application/json
+  - name: work collection OPTIONS (endpoint contract + JSON Schema)
+    url: https://bbdo.com/wp-json/wp/v2/work
+    file: bbdo-work-options.json
+    status: 200
+    method: OPTIONS
+  - name: news collection OPTIONS (endpoint contract + JSON Schema)
+    url: https://bbdo.com/wp-json/wp/v2/news
+    file: bbdo-news-options.json
+    status: 200
+    method: OPTIONS
+  - name: posts collection OPTIONS (endpoint contract + JSON Schema)
+    url: https://bbdo.com/wp-json/wp/v2/posts
+    file: bbdo-posts-options.json
+    status: 200
+    method: OPTIONS
+  - name: pages collection OPTIONS (endpoint contract + JSON Schema)
+    url: https://bbdo.com/wp-json/wp/v2/pages
+    file: bbdo-pages-options.json
+    status: 200
+    method: OPTIONS
+verified_reads:
+  - url: https://bbdo.com/wp-json/wp/v2/work?per_page=1
+    status: 200
+    x_wp_total: 46
+  - url: https://bbdo.com/wp-json/wp/v2/news?per_page=1
+    status: 200
+    x_wp_total: 60
+  - url: https://bbdo.com/wp-json/wp/v2/pages?per_page=1
+    status: 200
+    x_wp_total: 4
+  - url: https://bbdo.com/wp-json/wp/v2/posts?per_page=1
+    status: 200
+    x_wp_total: 1
+  - url: https://bbdo.com/wp-json/wp/v2/users?per_page=1
+    status: 200
+    x_wp_total: 3
+  - url: https://bbdo.com/wp-json/oembed/1.0/embed?url=https://bbdo.com/
+    status: 200
+gated:
+  - url: https://bbdo.com/wp-json/wp-abilities/v1/abilities
+    status: 401
+    note: >-
+      The WordPress Abilities API namespace is registered but requires
+      authentication; the agent-facing ability list could not be read
+      anonymously.
+not_found:
+  - url: https://bbdo.com/openapi.json
+    status: 404
+  - url: https://bbdo.com/graphql
+    status: 404
+caveat: >-
+  bbdo.com sits behind Cloudflare bot management. The same /wp-json/ request
+  returned application/json under a browser user-agent and, on one attempt, an
+  HTML challenge shell under a generic bot user-agent — so an agent reading this
+  surface may be served a different representation than a browser.

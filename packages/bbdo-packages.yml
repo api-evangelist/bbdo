@@ -1,0 +1,45 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  npm registry search, PyPI, RubyGems, crates.io, Packagist, and the
+  github.com/BBDO organization
+sdk_count: 0
+note: >-
+  BBDO Worldwide publishes no client libraries, because it publishes no API to
+  wrap. npm search for "bbdo" returned 0 results; pypi.org/pypi/bbdo/json,
+  rubygems.org/api/v1/gems/bbdo.json and crates.io returned no BBDO package. The
+  github.com/BBDO organization holds 31 public repositories, all campaign
+  experiments and third-party forks last pushed between 2010 and 2014 (an
+  openFrameworks LED-wall controller, a Google Glass Unity demo, a Kinect app,
+  and forks of Modernizr, html5-boilerplate, jQuery plugins). None is an SDK,
+  none references a BBDO API, and the organization record itself was last
+  updated in 2016. The single registry package carrying a "bbdo" vendor
+  namespace is listed below and belongs to Proximity BBDO, a sibling agency —
+  it is a Laravel utility, not an API client, so no SDKs pointer is emitted.
+packages:
+  - language: php
+    registry: packagist
+    name: bbdo/yaml-translation
+    url: https://packagist.org/packages/bbdo/yaml-translation
+    install: composer require bbdo/yaml-translation
+    version: '7.0'
+    published: '2022-06-30'
+    license: MIT
+    repository: https://github.com/proximitybbdo/laravel-yaml-translation
+    official: false
+    is_api_client: false
+    note: >-
+      Published under the "bbdo" Packagist vendor namespace by the
+      proximitybbdo GitHub organization — Proximity BBDO, BBDO's
+      customer-engagement sibling agency, not BBDO Worldwide. It adds YAML file
+      support to Laravel's TranslationServiceProvider; it is an internal
+      open-source helper with no relationship to any BBDO API. 15 versions, last
+      released 2022-06-30 — dormant for four years. Recorded for completeness
+      and explicitly not counted as a BBDO SDK.
+registries_checked:
+  - {registry: npm, query: bbdo, results: 0}
+  - {registry: pypi, package: bbdo, status: 404}
+  - {registry: rubygems, package: bbdo, status: 404}
+  - {registry: crates.io, query: bbdo, results: 0}
+  - {registry: packagist, query: bbdo, results: 1, note: 'the Proximity BBDO package above'}
+  - {registry: github, org: BBDO, public_repos: 31, last_push: '2014-02-27', sdks: 0}

@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  json-schema/bbdo-{work,news,posts,pages}.json and
+  discovery/bbdo-wp-v2-namespace.json, harvested from bbdo.com's own API
+note: >-
+  Entity graph derived from the JSON Schemas BBDO's WordPress REST API returns
+  from OPTIONS, plus the id-reference fields and _links relations observed on
+  live records. `work` and `news` are BBDO's own registered custom post types —
+  the campaign case studies and press items behind bbdo.com/work and
+  bbdo.com/news. Every entity and relationship below appears in a document
+  fetched from bbdo.com; none is assumed from the WordPress data model at large.
+entities:
+  - name: work
+    description: >-
+      A BBDO campaign case study. 46 published records reported via X-WP-Total.
+    collection: /wp-json/wp/v2/work
+    id_field: id
+    id_type: integer
+    schema: json-schema/bbdo-work.json
+    property_count: 20
+    key_properties: [id, date, date_gmt, modified, slug, status, type, link, title, content, featured_media, meta, template, class_list, guid, acf]
+    contexts: [view, embed, edit]
+  - name: news
+    description: >-
+      A BBDO press/news item. 60 published records reported via X-WP-Total.
+    collection: /wp-json/wp/v2/news
+    id_field: id
+    id_type: integer
+    schema: json-schema/bbdo-news.json
+    property_count: 20
+    contexts: [view, embed, edit]
+  - name: post
+    description: Core WordPress blog post type. 1 published record.
+    collection: /wp-json/wp/v2/posts
+    id_field: id
+    schema: json-schema/bbdo-posts.json
+    property_count: 28
+  - name: page
+    description: Static site page. 4 published records — home, about, work, news.
+    collection: /wp-json/wp/v2/pages
+    id_field: id
+    schema: json-schema/bbdo-pages.json
+    property_count: 26
+  - name: media
+    description: Attachment / image record referenced as a featured image.
+    collection: /wp-json/wp/v2/media
+    id_field: id
+  - name: category
+    description: Post taxonomy term. 1 term ("Uncategorized") — the taxonomy is effectively unused.
+    collection: /wp-json/wp/v2/categories
+    id_field: id
+  - name: tag
+    description: Post taxonomy term.
+    collection: /wp-json/wp/v2/tags
+    id_field: id
+  - name: user
+    description: Authoring user. 3 records exposed anonymously.
+    collection: /wp-json/wp/v2/users
+    id_field: id
+relationships:
+  - {from: work, to: media, type: has_one, via: featured_media, cardinality: 0..1}
+  - {from: work, to: user, type: belongs_to, via: author, cardinality: 0..1, note: 'exposed via the _links author relation'}
+  - {from: news, to: media, type: has_one, via: featured_media, cardinality: 0..1}
+  - {from: news, to: user, type: belongs_to, via: author, cardinality: 0..1}
+  - {from: post, to: media, type: has_one, via: featured_media, cardinality: 0..1}
+  - {from: post, to: category, type: has_many, via: categories, cardinality: 0..n}
+  - {from: post, to: tag, type: has_many, via: tags, cardinality: 0..n}
+  - {from: post, to: user, type: belongs_to, via: author, cardinality: 0..1}
+  - {from: page, to: page, type: belongs_to, via: parent, cardinality: 0..1}
+  - {from: page, to: media, type: has_one, via: featured_media, cardinality: 0..1}
+extension_fields:
+  - name: acf
+    description: >-
+      Advanced Custom Fields payload attached to every post type, exposed both
+      inline as an `acf` object and through the parallel acf/v3 namespace. This
+      is where BBDO's campaign-specific structured fields live.
+    namespace: acf/v3
+link_relations:
+  style: HAL-like _links object with curied relations, plus _embed for inline expansion
+  note: Discovery of related resources is via _links rather than typed foreign-key fields

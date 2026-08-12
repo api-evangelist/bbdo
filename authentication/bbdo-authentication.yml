@@ -1,0 +1,62 @@
+generated: '2026-08-12'
+method: probed
+source: https://bbdo.com/wp-json/ (authentication block) + observed responses
+docs: https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
+note: >-
+  Derived from the authentication block BBDO's own WordPress REST API root
+  advertises, plus observed anonymous behaviour. BBDO publishes no auth
+  documentation of its own; the model below is the WordPress platform default as
+  configured on bbdo.com. There is no OpenAPI securitySchemes block to read
+  because BBDO publishes no OpenAPI.
+summary:
+  types:
+    - none
+    - http
+  api_key_in: []
+  oauth2_flows: []
+  anonymous_read: true
+schemes:
+  - name: anonymous
+    type: none
+    description: >-
+      Read operations on public content are open. GET on wp/v2/work, wp/v2/news,
+      wp/v2/posts, wp/v2/pages, wp/v2/categories, wp/v2/users and the oembed
+      endpoints all returned HTTP 200 with no credentials.
+    verified:
+      - {url: 'https://bbdo.com/wp-json/wp/v2/work?per_page=1', status: 200}
+      - {url: 'https://bbdo.com/wp-json/wp/v2/news?per_page=1', status: 200}
+    sources: [discovery/bbdo-wp-json-root.json]
+  - name: application-passwords
+    type: http
+    scheme: basic
+    description: >-
+      WordPress Application Passwords, advertised in the REST root's
+      `authentication` object. Credentials are issued per-user from the site's
+      own admin at the authorization endpoint below and presented as HTTP Basic.
+      This is an operator/editor credential path, not a developer program — BBDO
+      offers no self-service registration.
+    authorization_endpoint: https://bbdo.com/wp-admin/authorize-application.php
+    sources: [discovery/bbdo-wp-json-root.json]
+  - name: cookie-and-nonce
+    type: apiKey
+    in: header
+    parameter: X-WP-Nonce
+    description: >-
+      The standard WordPress logged-in cookie plus nonce path. Inferred from the
+      Access-Control-Allow-Headers response header on wp/v2 collections, which
+      advertises `Authorization, X-WP-Nonce, Content-Disposition, Content-MD5,
+      Content-Type`. Only usable from an authenticated browser session.
+    sources: ['observed response header on https://bbdo.com/wp-json/wp/v2/work']
+write_operations:
+  authenticated: true
+  evidence:
+    url: https://bbdo.com/wp-json/wp/v2/work
+    method: POST
+    status: 401
+    body: '{"code":"rest_cannot_create","message":"Sorry, you are not allowed to create posts as this user.","data":{"status":401}}'
+oauth: false
+oauth_note: >-
+  No OAuth 2.0 or OpenID Connect surface. /.well-known/oauth-authorization-server
+  and /.well-known/openid-configuration both returned 404, and no oauth
+  namespace is registered in the REST root. scopes/ is therefore not applicable
+  and no OAuthScopes artifact is written.

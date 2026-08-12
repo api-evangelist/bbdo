@@ -1,0 +1,54 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  derived from observed behaviour of https://bbdo.com/wp-json/wp/v2/* and the
+  route contracts in discovery/
+note: >-
+  BBDO makes no compliance or standards claims anywhere on its public surface —
+  no trust center, no certifications page, no security page. The assertions
+  below are derived strictly from what the deployed WordPress REST API does on
+  the wire. No Compliance pointer is emitted, because BBDO publishes no
+  compliance program.
+standards:
+  - id: json-schema-draft-04
+    conforms: true
+    evidence: >-
+      Every wp/v2 collection returns a $schema of
+      http://json-schema.org/draft-04/schema# from OPTIONS; harvested verbatim to
+      json-schema/bbdo-{work,news,posts,pages}.json
+  - id: rfc8288-web-linking
+    conforms: true
+    evidence: 'Link header with rel="next"/rel="prev" on paginated collections'
+  - id: oembed-1.0
+    conforms: true
+    evidence: 'oembed/1.0 namespace registered; /wp-json/oembed/1.0/embed returned 200 with a valid oEmbed payload'
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use the WordPress {code,message,data.status} envelope as
+      application/json, not application/problem+json
+  - id: oauth2
+    conforms: false
+    evidence: 'no oauth namespace registered; /.well-known/oauth-authorization-server returned 404'
+  - id: openid-connect
+    conforms: false
+    evidence: '/.well-known/openid-configuration returned 404'
+  - id: openapi
+    conforms: false
+    evidence: 'no OpenAPI document served; /openapi.json, /swagger.json, /api-docs all 404'
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: '/.well-known/security.txt returned 404'
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: 'no Sunset or Deprecation header on any observed response'
+  - id: a2a-agent-card
+    conforms: false
+    evidence: '/.well-known/agent-card.json and /.well-known/agent.json both returned 404'
+  - id: cors
+    conforms: true
+    evidence: >-
+      Access-Control-Allow-Headers and Access-Control-Expose-Headers returned on
+      wp/v2 collections
+certifications: []
+compliance_program_published: false

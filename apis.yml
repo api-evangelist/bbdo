@@ -51,7 +51,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/bbdo/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-08-12'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: bbdo:wordpress-rest-api
     name: BBDO WordPress REST API

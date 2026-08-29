@@ -59,6 +59,8 @@ tags:
   - Content
   - WordPress
 url: >-
+x-api-posture: no-product-api
+x-api-posture-basis: observed
   https://raw.githubusercontent.com/api-evangelist/bbdo/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-08-12'

@@ -2,13 +2,35 @@ generated: '2026-08-12'
 method: probed
 source: live HTTPS probes of https://bbdo.com/.well-known/*
 host: https://bbdo.com
-note: >-
-  Every /.well-known/ path probed on bbdo.com returned HTTP 404 with an HTML
-  body from the WordPress theme's 404 handler. No well-known document is
-  served. Recorded as an absence — no WellKnown or SecurityTxt pointer is
-  emitted in apis.yml, because the pointer would assert BBDO publishes a
-  discovery surface it does not.
-documents:
+note: Every /.well-known/ path probed on bbdo.com returned HTTP 404 with an HTML body from the WordPress
+  theme's 404 handler. No well-known document is served. Recorded as an absence — no WellKnown or SecurityTxt
+  pointer is emitted in apis.yml, because the pointer would assert BBDO publishes a discovery surface
+  it does not.
+other_probes:
+- path: /llms.txt
+  status: 404
+- path: /openapi.json
+  status: 404
+- path: /swagger.json
+  status: 404
+- path: /api-docs
+  status: 404
+- path: /docs
+  status: 404
+- path: /graphql
+  status: 404
+- path: /robots.txt
+  status: 200
+  note: 'Disallow /wp-admin/ only; Crawl-delay: 10; sitemap at /wp-sitemap.xml'
+- path: /wp-sitemap.xml
+  status: 200
+- path: /wp-json/
+  status: 200
+  note: The one machine-readable surface BBDO serves — the WordPress REST API route discovery document.
+    Captured verbatim at discovery/bbdo-wp-json-root.json.
+hosts:
+- host: https://bbdo.com
+  documents:
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
@@ -23,27 +45,8 @@ documents:
     status: 404
   - path: /.well-known/agent.json
     status: 404
-other_probes:
-  - path: /llms.txt
-    status: 404
-  - path: /openapi.json
-    status: 404
-  - path: /swagger.json
-    status: 404
-  - path: /api-docs
-    status: 404
-  - path: /docs
-    status: 404
-  - path: /graphql
-    status: 404
-  - path: /robots.txt
-    status: 200
-    note: 'Disallow /wp-admin/ only; Crawl-delay: 10; sitemap at /wp-sitemap.xml'
-  - path: /wp-sitemap.xml
-    status: 200
-  - path: /wp-json/
-    status: 200
-    note: >-
-      The one machine-readable surface BBDO serves — the WordPress REST API
-      route discovery document. Captured verbatim at
-      discovery/bbdo-wp-json-root.json.
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

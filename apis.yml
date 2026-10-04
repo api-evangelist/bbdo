@@ -66,51 +66,20 @@ created: '2026-05-23'
 modified: '2026-08-12'
 specificationVersion: '0.23'
 apis:
-  - aid: bbdo:wordpress-rest-api
-    name: BBDO WordPress REST API
-    description: >-
-      bbdo.com runs on WordPress (WP Engine, fronted by Cloudflare) and leaves
-      the WordPress REST API open for anonymous reads. The route discovery
-      document at https://bbdo.com/wp-json/ enumerates 10 namespaces and 200
-      routes, and two of the registered post types are BBDO's own editorial
-      content models: `work`, the campaign case-study archive behind
-      bbdo.com/work (46 published records), and `news`, the press archive behind
-      bbdo.com/news (60 published records). Both are readable without
-      credentials, paginate with page/per_page plus X-WP-Total and RFC 8288 Link
-      headers, support sparse fieldsets via _fields and expansion via _embed,
-      and return draft-04 JSON Schema documents from OPTIONS. Writes require a
-      WordPress Application Password issued from BBDO's own admin; there is no
-      self-service registration. This is the WordPress platform's contract as
-      deployed at bbdo.com, not an API product BBDO designed, documents, prices,
-      or supports — BBDO publishes no developer portal, OpenAPI, SDK, changelog,
-      status page, or rate limits.
-    humanURL: https://developer.wordpress.org/rest-api/
-    baseURL: https://bbdo.com/wp-json/wp/v2
+  - aid: bbdo:bbdo-com-website-wordpress-rest
+    name: BBDO Worldwide Website (WordPress REST)
+    description: 'The public WordPress REST API (wp-json) of the BBDO Worldwide website at bbdo.com: the
+      route index of the site''s content management system, catalogued as one site surface rather than as
+      separate APIs.'
+    baseURL: https://bbdo.com/wp-json
     tags:
-      - Content
-      - JSON
-      - REST
-      - WordPress
-      - Advertising
+    - WordPress
+    x-surface: platform-generated
     properties:
-      - type: Documentation
-        url: https://developer.wordpress.org/rest-api/
-        name: WordPress REST API Handbook (platform documentation; BBDO publishes none)
-      - type: Discovery
-        url: https://bbdo.com/wp-json/
-        name: WordPress REST API route discovery document
-      - type: JSONSchema
-        url: json-schema/_index.yml
-      - type: Authentication
-        url: authentication/bbdo-authentication.yml
-      - type: Conventions
-        url: conventions/bbdo-conventions.yml
-      - type: ErrorCatalog
-        url: errors/bbdo-problem-types.yml
-      - type: DataModel
-        url: data-model/bbdo-data-model.yml
-      - type: RateLimits
-        url: rate-limits/bbdo-rate-limits.yml
+    - type: Documentation
+      url: https://bbdo.com/wp-json
+    x-platform: wordpress
+    x-platform-surface: rest
 common:
   - type: DomainSecurity
     url: security/bbdo-domain-security.yml

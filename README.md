@@ -1,4 +1,4 @@
-# BBDO Worldwide (bbdo)
+# BBDO Worldwide
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,118 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-BBDO Worldwide is a global advertising agency network founded in 1928 and
-headquartered in New York City. It is the largest of the creative-agency
-networks owned by Omnicom Group, with roughly 15,000 employees across
-approximately 289 offices in 81 countries (per Wikipedia, citing company
-data). The agency's positioning is "Do Big Things," and its public work is
-campaign-led — Pepsi, Budweiser, McDonald's, M&M's, Snickers, Visa, AT&T
-Business, Volkswagen, Skoda, Whiskas, and many more. BBDO has been named
-Cannes Lions Network of the Year multiple times since 2007 and Network of
-the Decade in 2020.
+BBDO Worldwide is a global advertising agency network founded in 1928 and headquartered in New York City. It is the largest of the creative-agency networks owned by Omnicom Group, with roughly 15,000 employees across approximately 289 offices in 81 countries (per Wikipedia, citing company data). The agency's positioning is "Do Big Things," and its public work is campaign-led — Pepsi, Budweiser, McDonald's, M&M's, Snickers, Visa, AT&T Business, Volkswagen, Skoda, Whiskas, and many more. BBDO has been named Cannes Lions Network of the Year multiple times since 2007 and Network of the Decade in 2020. BBDO does not publish a developer portal, public REST APIs, OpenAPI specifications, SDKs, status page, or pricing — its product is creative work delivered to brand clients, not software offered to developers. The one machine-readable surface bbdo.com serves is the WordPress REST API behind the site itself: /wp-json/ answers anonymously with a 200-route discovery document, and the agency's own `work` and `news` custom post types are readable without credentials — 46 campaign case studies and 60 press items with draft-04 JSON Schemas available from each collection's OPTIONS response. That is a CMS byproduct, not a product BBDO designed, documents, prices, or supports. This repository indexes the public properties (homepage, network site, news, parent company, GitHub org, and notable agency network members), captures what the WordPress API actually serves, and links BBDO to its parent Omnicom and sibling networks (DDB Worldwide, TBWA Worldwide).
 
-BBDO does not publish a developer portal, public REST APIs, OpenAPI
-specifications, SDKs, status page, or pricing — its product is creative
-work delivered to brand clients, not software offered to developers. This
-repository indexes the public properties (homepage, network site, news,
-parent company, GitHub org, and notable agency network members) so the API
-Evangelist network can track the absence of a developer surface and link
-BBDO to its parent Omnicom and sibling networks (DDB Worldwide, TBWA
-Worldwide).
+**Areas:** Advertising · Marketing · Creative · Agency · Agency Network · Holding Company Subsidiary · Brand Strategy · Media · Content · WordPress
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/bbdo/refs/heads/main/apis.yml)
+## BBDO Worldwide on APIs.io
 
-## Scope
+Everything profiled for BBDO Worldwide is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bbdo/](https://apis.io/providers/bbdo/)** — or go straight to one of the APIs or properties below.
 
-- **Type:** Index
-- **Position:** Consuming
-- **Access:** Private (no public developer surface)
+### APIs (1)
 
-## Tags
+- [BBDO Worldwide Website (WordPress REST)](https://apis.io/apis/bbdo/bbdo-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the BBDO Worldwide website at bbdo.com: the route index of the site's content management system, catalogued as…
 
-- Advertising
-- Marketing
-- Creative
-- Agency
-- Agency Network
-- Holding Company Subsidiary
-- Brand Strategy
-- Media
+### Published properties
 
-## At a Glance
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Field | Value |
-|---|---|
-| Founded | 1928 |
-| Headquarters | New York, NY, USA |
-| Parent | Omnicom Group (omc.com) |
-| Employees | ~15,000 |
-| Offices | ~289 |
-| Countries | ~81 |
-| Tagline | "Do Big Things" |
+#### JSON Schema (4)
 
-Scale figures per the [BBDO Wikipedia entry](https://en.wikipedia.org/wiki/BBDO),
-which cites company data: *"With more than 15,000 employees at 289 offices in
-81 countries, it is the largest of three global networks of agencies in the
-portfolio of Omnicom Group."*
+The data models the API reads and writes.
 
-## APIs
+- [news](https://apis.io/schemas/bbdo/bbdo-news/)
+- [page](https://apis.io/schemas/bbdo/bbdo-pages/)
+- [post](https://apis.io/schemas/bbdo/bbdo-posts/)
+- [work](https://apis.io/schemas/bbdo/bbdo-work/)
 
-No public REST APIs, OpenAPI specifications, SDKs, webhooks, status page,
-changelog, or pricing pages are published by BBDO Worldwide. The agency
-operates as a service business — creative strategy and execution for brand
-clients — with no developer-facing product surface. Any technology
-integrations (ad-tech, measurement, identity, data) are consumed via
-sibling Omnicom networks (Annalect, Omnicom Media Group) or third-party
-ad-tech vendors rather than exposed by BBDO itself.
+#### Security (2)
 
-The [BBDO GitHub organization](https://github.com/BBDO) exists and lists
-31 public repositories, but the catalog is almost entirely forks of common
-open-source JavaScript libraries from 2012-2013 (Modernizr, RequireJS,
-jQuery Mobile, page.js, etc.) plus a handful of original campaign /
-installation projects (openFrameworks Kinect apps, LED wall code, a Google
-Glass game). It is not a developer-product surface and contains no SDKs,
-APIs, or maintained tooling.
+Authentication, trust centre, and vulnerability disclosure.
 
-## Notable Clients
+- [Bbdo Authentication](https://apis.io/security/bbdo/bbdo-authentication/)
+- [Bbdo Domain Security](https://apis.io/security/bbdo/bbdo-domain-security/)
 
-Pepsi, Budweiser, McDonald's, M&M's / Mars, Snickers, Visa, AT&T Business,
-Volkswagen, Skoda, Whiskas, Pringles, Maltesers, John West, Salomon, Glad,
-Intermarche.
+#### Plans and pricing (1)
 
-## Notable Campaigns
+Published plans, tiers and prices.
 
-- Pepsi — "The Choice" (Super Bowl 60, 2026)
-- Budweiser — "American Icons" (Super Bowl 60, 2026)
-- Snickers — "You're Not You When You're Hungry"
-- Visa — "It's Everywhere You Want To Be"
-- Burger King — "Have It Your Way"
-- DuPont — "Better Things For Better Living Through Chemistry"
+- [Bbdo Plans Pricing](https://apis.io/plans/bbdo/bbdo-plans-pricing/)
 
-## Awards
+#### Rate limits (1)
 
-- Cannes Lions Network of the Decade (2020)
-- Cannes Lions Network of the Year (2007-2011, 2017-2018)
-- Most Effective Network in the World — Global Effie Index (multiple years)
-- WARC Network of the Year (2006-2019)
-- Adweek Global Network of the Year (2011, 2014)
+Published request limits.
 
-## Common Properties
+- [Bbdo Rate Limits](https://apis.io/rate-limits/bbdo/bbdo-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://bbdo.com)
-- [Work](https://bbdo.com/work)
-- [News](https://bbdo.com/news)
-- [About](https://bbdo.com/about)
-- [Parent — Omnicom Group](https://omc.com/)
-- [Sister Network — DDB Worldwide](https://www.ddb.com/)
-- [Sister Network — TBWA Worldwide](https://www.tbwa.com/)
-- [Sister Agency — Proximity Worldwide](https://www.proximityworldwide.com/)
 - [GitHub](https://github.com/BBDO)
-- [LinkedIn](https://www.linkedin.com/company/bbdo)
-- [Wikipedia](https://en.wikipedia.org/wiki/BBDO)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 12.8** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 58.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 0.0 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bbdo/](https://apis.io/providers/bbdo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BBDO Worldwide: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bbdo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
